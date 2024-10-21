@@ -63,10 +63,10 @@ bot.on(message('document'), (ctx) => {
   if (!photo) return ctx.reply('Photo not found')
   const fileId = photo.file_id
   ctx.reply('Photo found')
-  bot.telegram.getFileLink(fileId).then((link) => {
-    console.log(fileId, link)
-    recognizeText(link.toString())
-    // ctx.reply(link.toString())
+  bot.telegram.getFileLink(fileId).then(async (link) => {
+    // console.log(fileId, link)
+    const text = await recognizeText(link.toString())
+    ctx.reply(text)
   })
 })
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
